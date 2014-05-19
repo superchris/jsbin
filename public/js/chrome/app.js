@@ -1,20 +1,20 @@
-// if a gist has been requested, lazy load the gist library and plug it in
-if (/gist(\/.*)?\/\d+/.test(window.location.pathname) && (!sessionStorage.getItem('javascript') && !sessionStorage.getItem('html'))) {
-  window.editors = editors; // needs to be global when the callback triggers to set the content
-  loadGist = function () {
-    setTimeout(function() {
+$(function() {
+  // if a gist has been requested, lazy load the gist library and plug it in
+  if (/gist(\/.*)?\/\d+/.test(window.location.pathname) && (!sessionStorage.getItem('javascript') && !sessionStorage.getItem('html'))) {
+    window.editors = editors; // needs to be global when the callback triggers to set the content
+    loadGist = function () {
       $.getScript(jsbin.static + '/js/chrome/gist.js', function () {
         window.gist = new Gist(window.location.pathname.replace(/.*\/([^/]+)$/, "$1"));
       });
-    }, 100);
-  };
+    };
 
-  if (editors.ready) {
-    loadGist();
-  } else {
-    $document.on('jsbinReady', loadGist);
-  }
-}
+    if (editors.ready) {
+      loadGist();
+    } else {
+      $document.on('jsbinReady', loadGist);
+    }
+  }  
+});
 
 // prevent the app from accidently getting scrolled out of view
 if (!jsbin.mobile) document.body.onscroll = window.onscroll = function () {
