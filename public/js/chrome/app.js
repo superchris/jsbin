@@ -4,11 +4,11 @@ $(function() {
     // if a gist has been requested, lazy load the gist library and plug it in
     if (/gist(\/.*)?\/\d+/.test(window.location.pathname) && (!sessionStorage.getItem('javascript') && !sessionStorage.getItem('html'))) {
       window.editors = editors; // needs to be global when the callback triggers to set the content
-      loadGist = function () {
-        $.getScript(jsbin.static + '/js/chrome/gist.js', function () {
+      // loadGist = function () {
+        // $.getScript(jsbin.static + '/js/chrome/gist.js', function () {
           window.gist = new Gist(window.location.pathname.replace(/.*\/([^/]+)$/, "$1"));
-        });
-      };
+        // });
+      // };
 
       if (editors.ready) {
         loadGist();
