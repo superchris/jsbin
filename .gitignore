@@ -5,6 +5,7 @@ public/js/jsbin*.js
 public/js/prod/*
 .nodemonignore
 !config.default.json
+!config.heroku.json
 statsd.js
 .allow-devtools-edit
 jsbin.sqlite
